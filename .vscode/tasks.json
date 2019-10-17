@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "clean",
+            "command": "dotnet",
+            "args": [
+                "clean",
+                "./dashbreaks.sln"
+            ],
+            "type": "shell",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./dashbreaks.sln"
+            ],
+            "type": "shell",
+            "dependsOn": "clean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "runFunctionsHost",
+            "type": "shell",
+            "dependsOn": "build",
+            "options": {
+              "cwd": "${workspaceFolder}/src/DashBreaksDurable/bin/Debug/netcoreapp2.1"
+            },
+            "command": "func host start",
+            "isBackground": true,
+            "presentation": {
+              "reveal": "always"
+            },
+            "problemMatcher": "$func-watch"
+          }
+    ]
+}
